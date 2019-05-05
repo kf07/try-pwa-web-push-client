@@ -3,6 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import "./axios";
 import "./storage";
+import "./firebase";
 
 Vue.config.productionTip = false;
 

@@ -1,22 +1,25 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <h1>Try PWA Push</h1>
+    <section>
+      <h2>Env Information</h2>
+
+      <p>
+        <span>Web Push:</span>
+        <span>{{ webPushUsable | usable }}</span>
+      </p>
+    </section>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
 export default {
   name: "home",
-  components: {
-    HelloWorld
+  filter: {
+    usable: flg => (flg === true ? "◯" : "×")
   },
-  async mounted() {
-    const response = await this.$_axios.get("/");
-    console.log(response);
+  computed: {
+    webPushUsable: vm => vm.$_webPush.usable
   }
 };
 </script>
