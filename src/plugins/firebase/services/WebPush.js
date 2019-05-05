@@ -13,4 +13,39 @@ export class WebPush {
   get usable() {
     return this._usable;
   }
+
+  get SUCCESS() {
+    return "success";
+  }
+
+  get FAILED() {
+    return "failed";
+  }
+
+  get APPROVED() {
+    return "approved";
+  }
+
+  get REJECTED() {
+    return "rejected";
+  }
+
+  get NOT_SUPPORTED() {
+    return "not_supported";
+  }
+
+  async requestPermission() {
+    if (this.usable === false) {
+      return this.NOT_SUPPORTED;
+    }
+    const result = await this._messaging
+      .requestPermission()
+      .then(() => true)
+      .catch(err => {
+        // エラーのときは拒否されているとき
+        console.error(err);
+        return false;
+      });
+    return result ? this.APPROVED : this.REJECTED;
+  }
 }
